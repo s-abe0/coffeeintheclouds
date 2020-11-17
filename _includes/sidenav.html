@@ -1,0 +1,7 @@
+{% if site.data.pages.pages[0] %}
+    <ul class="nav flex-column">
+    {% for page in site.data.pages.pages %}
+        <li class="nav-item"><a class="nav-link" href={{ page.url }}>{{ page.title }}</a></li>
+    {% endfor %}
+    </ul>
+{% endif %}
