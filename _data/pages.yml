@@ -1,6 +1,18 @@
 pages:
-- title: Page 1
-  url: docs/page1
+- title: Regions & Zones
+  url: /docs/regions-and-zones
 
-- title: Page 2
-  url: docs/page2
+- title: IAM
+  url: /docs/iam
+
+- title: Route 53
+  url: /docs/route53
+
+- title: EC2
+  url: /docs/ec2
+
+- title: RDS
+  url: /docs/rds
+
+- title: ElastiCache
+  url: /docs/elasticache
