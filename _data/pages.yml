@@ -1,18 +1,18 @@
 pages:
 - title: Regions & Zones
-  url: /docs/regions-and-zones
+  url: /coffeeintheclouds/docs/regions-and-zones
 
 - title: IAM
-  url: /docs/iam
+  url: /coffeeintheclouds/docs/iam
 
 - title: Route 53
-  url: /docs/route53
+  url: /coffeeintheclouds/docs/route53
 
 - title: EC2
-  url: /docs/ec2
+  url: /coffeeintheclouds/docs/ec2
 
 - title: RDS
-  url: /docs/rds
+  url: /coffeeintheclouds/docs/rds
 
 - title: ElastiCache
-  url: /docs/elasticache
+  url: /coffeeintheclouds/docs/elasticache

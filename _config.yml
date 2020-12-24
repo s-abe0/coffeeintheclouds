@@ -36,5 +36,5 @@ plugins:
 
 collections:
   docs:
-    permalink: /:collection/:path/
+    permalink: /coffeeintheclouds/:collection/:path/
     output: true
