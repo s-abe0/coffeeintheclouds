@@ -206,38 +206,22 @@ Data survives a reboot, but is lost if any of the follow occurs:
 #### Elastic File System (EFS)
 Provides simple, scalable, fully managed elastic NFS (Network File System) that can be mounted on many EC2 instances across multiple AZs. Scales on demand to petabytes, growing and shrinking as files are added/removed.
 
-Uses NFSv4 to provide traditonal file structure capabilities. EFS can be access by EC2 instances or on-premise servers using AWS Direct Connect or AWS VPN. EFS uses security groups to control access, and is only compatible with Linux. Encryption at rest using KMS is also available.
+Uses NFSv4 to provide traditonal file structure capabilities. EFS can be accessed by EC2 instances or on-premise servers using AWS Direct Connect or AWS VPN. EFS uses security groups to control access, and is only compatible with Linux. Encryption at rest using KMS is also available.
 
 **EFS Storage Classes**
+
 *Standard* - Used for frequently accessed files.
 *Infrequent Access storage class (EFS IA)* - Cost to retrieve files, but lower price to store data. Cost-optimized for files that are not accessed every day. Using EFS Lifecycle, files not access frequently can be moved to EFS IA.
 
 **EFS Performance Modes**
+
 *General purpose (default)* - For normal use; ideal for latency-sensitive use cases such as web-server, CMS, home directories, etc.
 *Max I/O* - Can scale to higher levels of aggregate throughput and ops per second with tradeoff of higher latencies. Best for highly parallelized apps and workloads such as big data analysis, media processing, and genmoics analysis.
 
 **EFS Throughput Modes**
+
 *Bursting (default)* - Throughput scales as file system grows. Some workloads can be spiky, driving high throughput for short periods of time; EFS bursts to high throughput levels for a period of time. Can burst to 100MB/s of throughput; if over 1TB, can burst to 100MB/s per TB of data stored. Bursting uses a credit system, similar to t2 bursting credit system.
-*Provisioned* - Allows to specify the throughput of a file system independent of stored data size.
-
-  * Two storage classes:
-    * Standard – Used for frequently accessed filed
-    * Infrequent Access (EFS IA) – Cost to retrieve files, but lower price to store data. Used for less-frequently accessed files.
-  * Two performance modes:
-    * General purpose – Ideal for latency-sensitive use cases; web server, CMS, etc.
-    * Max I/O – Can scale to higher levels of aggregate throughput and ops per second with tradeoff of higher latencies; good for big data, media processing
-  * Two throughput modes:
-    * Bursting – Throughput scales as size of file system grows
-    * Provisioned – Can provision the throughput independent of storage size
-  * Can enable EFS Lifecycle Management, which moves files from Standard to EFS IA after N days
-  * Uses security group to control access
-  * Encryption at rest using KMS
-  * Can only be used with Linux; is a POSIX file system
-
-
-
-
-
+*Provisioned* - Allows to specify the throughput of a file system independent of stored data size. Good for scenarios where there is low amounts of data storage but a need for higher throughput than what Bursting can provide. Charge for amount of data stored and for throughput that is provisioned above what is provided.
 
 
 
