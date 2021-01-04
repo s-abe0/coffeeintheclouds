@@ -16,3 +16,6 @@ pages:
 
 - title: ElastiCache
   url: /coffeeintheclouds/docs/elasticache
+
+- title: VPC
+  url: /coffeeintheclouds/docs/vpc

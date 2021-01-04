@@ -49,7 +49,9 @@ The primary DB instance switches over to the standby replica during any of the f
 
 **RDS Security - Encryption**
 
-*At rest encryption* - Encryption for an RDS instance can be enabled to encrypt data at rest, which includes underlying storage data, automated backups, read replicas and snapshots. AES-256 is used for encryption. RDS also supports Transparent Data Encryption (TDE) for Oracle and SQL Server instances. 
+*At rest encryption* - Encryption for an RDS instance can be enabled to encrypt data at rest, which includes underlying storage data, automated backups, read replicas and snapshots. AES-256 is used for encryption. 
+
+RDS also supports *Transparent Data Encryption (TDE)* for Oracle and MS SQL Server instances. 
 
 Encryption must be defined at launch time, and if the master is not encrypted, the read replicas cannot be encrypted. However, an un-encrypted DB can be encrypted by performing the following:
   1. Create a snapshot of the un-encrypted DB
@@ -63,7 +65,7 @@ Encryption must be defined at launch time, and if the master is not encrypted, t
 
 RDS databases can be deployed either publicly or privately (within an VPC). Normally, instances are deployed privately, having no public IP or DNS. Instances are secured using security groups, in the same manner as EC2 instances
 
-IAM can be utilized to provide access management; creating IAM policies to control who can manage RDS. IAM database authentication can be used with MySQL and PostgreSQL, which removes the use of passwords when connecting to the DB. Instead of having to store credentials in the database, authentication tokens are used. And *authentication token* is a unique string of characters that RDS generates on request, with a lifetime of 15 minutes.
+IAM can be utilized to provide access management; creating IAM policies to control who can manage RDS. IAM database authentication can be used with MySQL and PostgreSQL, which removes the use of passwords when connecting to the DB. Instead of having to store credentials in the database, authentication tokens are used. An *authentication token* is a unique string of characters that RDS generates on request, with a lifetime of 15 minutes.
 
 IAM authentication provides the following benefits:
   * Encrypted network traffic using SSL or TLS
@@ -73,50 +75,38 @@ IAM authentication provides the following benefits:
 
 #### Amazon Aurora
 
-A proprietary technology from AWS which is MySQL and Postgres compatible.
-  * Up to 5x faster than standard MySQL DB and 3x faster than standard Postgres DB
-  * Provides security, availability and reliability of commercial DB at 1/10th the cost
-  * Fully managed by RDS; automates administration tasks (patching, backups, etc)
-  * Distributed, fault-tolerant, self-healing storage auto-scaling up to 128TB in increments of 10GB
-  * Up to 15 read replicas; replication process is much faster
-  * Provides point-in-time recovery, continuous backup to S3, and replication across three AZs
-  * Costs more than RDS (20% more), but is more efficient
+A fully managed proprietary relational database engine compatible with MySQL and PostgreSQL, allowing existing MySQL and Postgres application to easily migrate to Aurora. It can deliver up to 5x througput of MySQL and 3x throughput of Postgres, and automates clustering, replication and storage allocation. The underlying storage grows automatically as needed, up to 128 Tebibytes (TiB).
 
-Aurora High Avaliability
-  * Replicates 6 copies of data across 3 AZs, backing up data to S3
-    * Only needs 4 copies of 6 needed for writes, 3 copies of 6 needed for reads; If one AZ goes down, your still OK
-  * Self-healing – If some data goes bad, uses peer-to-peer replication to recover
-  * Storage is striped across 100s of volumes
-  * One Aurora instance takes master role; if master fails, read replica can become master
+**Aurora DB Clusters**
 
-**Aurora DB Cluster**
+Consists of one or more DB instances and a cluster volume that manages data for those DB instances. 
 
-Consists of one or more DB instances and a cluster volume that manages data for those instances. Cluster volume is a virtual DB storage volume that spans multiple AZs. Two types of DB instances make up an Aurora cluster:
-    1.	Primary instance – Supports read/write operations and performs all modifications to cluster volume. One primary per cluster.
-    2.	Aurora Replica – Connects to same storage volume as primary and supports only reads. Up to 15 replicas per cluster in addition to primary.
+A *cluster volume* is a virtual DB storage volume that spans multiple AZs, with each AZ having a copy of the cluster data. There are 6 copies of data across 3 AZs; only 4 copies are needed for writes and 3 copies are needed for reads. Self-healling with peer-to-peer replication is provided, and storage is striped across 100s of volumes. 
 
-Cluster Endpoints
-An Aurora-specific URL which allows connecting to various parts of the Aurora DB cluster
-    *Cluster endpoint (writer endpoint)* – Connects to current primary DB instance. Only one that can perform write operations such as DDL (Data Definition Language) statements.
-    *Reader endpoint* – Provides load balancing support for read-only connections to the read replicas.
+There are two types of DB instances in an Aurora DB cluster:
 
-*Aurora Security* – The same as RDS
+*Primary DB instance* - Supports read and write operations, performing all data modifications to the cluster volume. Only one primary instance per DB cluster.
 
-Aurora Serverless
+*Aurora Replica* - Supports only read operations from the same storage volume as the primary instance. Each cluster can have up to 15 replicas in addition to the primary instance, spread across separate AZs for high availability. Automatic failover to a replica occurs if the primary instances becomes unavailable.
 
-An on-demand, auto-scaling config for Aurora where the DB will automatically start up, shut down and scale based on application needs. Good for infrequent, intermittent or unpredictable workloads.
 
-Simply create DB endpoint, optionally specify desired capacity, and connect applications. Pay on a per-second basis for capacity used when DB is active. Can migrate between standard and serverless configs.
+**Aurora Serverless**
 
-Use cases
-  * Infrequently used apps – App is only used for a few minutes several times a day or week
-  * New apps – Deploying a new app and are unsure which instance size you need
-  * Variable workloads – Running lightly used app with peaks of 30 minutes to several hours a few times each day or year (human resources, budgeting, reporting app)
-  * Unpredictable workloads – Workloads where there is DB usage throughout the day, and peaks of activity that are hard to predict. 
-  * Dev and Test databases – DB used during work hours, but will automatically shut down when not in use.
-  * Multitenant Apps – Web app with DB for each customer. Aurora manages individual capacity
+An on-demand, auto-scaling config for Aurora where the DB will automatically start up, scale and shut down based on application needs. It provides a simple, cost effective option for infrequent, intermittent or unpredictable workloads.
 
-Aurora Global DB
+*Advantages of Aurora Serverless*
 
-Designed for globally distributed apps, allowing a single Aurora DB to span multiple regions. Consists of one primary region and up to 5 read-only, secondary regions. Up to 16 read replicas per secondary region. Can promote a secondary region to primary.
+* Simpler - Serverless removes much of the complexity of managing DB instances and capacity. Simply create DB endpoint, optionally specify desired capacity, and connect applications.
+* Scalable - Seemlessly scales compute and memory capacity as needed.
+* Cost effective - Pay only for resources used on a per-second basis.
+* Highly available storage - Uses the same fault-tolerant, distributed storage system as a normal Aurora set-up.
+
+
+*Use Cases*
+
+* Infrequently used apps - Apps only used for short periods of time per day or week, such as a low volume blog site.
+* New apps - When deploying a new application and are unsure about instance size needed.
+* Variable workloads - Applications that are lightly used, with peaks of 30 minutes to a few hours a day. Examples are human resources, budgeting and operation reporting apps. 
+* Unpredictable workloads - Daily workloads with sudden and unpredictable increases in activity. Example is a traffic site that sees a surge of activity when it starts raining.
+* Dev and test databases - Databases used during work hours.
 
