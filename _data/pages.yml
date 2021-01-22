@@ -19,3 +19,12 @@ pages:
 
 - title: VPC
   url: /coffeeintheclouds/docs/vpc
+
+- title: S3
+  url: /coffeeintheclouds/docs/s3
+
+- title: Architecture
+  url: /coffeeintheclouds/docs/architecture
+
+- title: AWS CLI
+  url: /coffeeintheclouds/docs/awscli

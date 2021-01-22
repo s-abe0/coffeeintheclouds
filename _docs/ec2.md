@@ -50,6 +50,25 @@ Example EC2 User Data script installing Apache Httpd:
   * Can create custom AMI with pre-installed packages, providing faster boot times and more customization to fit business needs.
   * AMI's are built for specific AWS Regions; they are not globably available
 
+**EC2 Instance Metadata**
+
+EC2 Instance Metadata allows EC2 instances to query for data about themselves. AWS hosts a URL which only valid from EC2 instances: ```http://169.254.169.254/latest/meta-data/```. This URL can be navigated similar to a directory structure; listings with an ending slash contain more listings (like a directory), and listings without an ending slash contain information (like a file).
+
+Example:
+
+  ```
+  $ curl http://169.254.169.254/latest/meta-data/
+
+  ami-id
+  ami-launch-index
+  ami-manifest-path
+  block-device-mapping/
+  metrics/
+  network/
+  ```
+
+*Note:* Dont forget to include the ending slash in the curl command URI
+
 #### Instance Launch Types
   * On Demand – Short workload, predictable pricing
     * Pay for use – billing per second after first minute
