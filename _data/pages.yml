@@ -1,30 +1,38 @@
-pages:
-- title: Regions & Zones
-  url: /coffeeintheclouds/docs/regions-and-zones
+contents:
+- title: AWS
+  id: aws
+  entries:
+    - title: Regions & Zones
+      url: /docs/aws/regions-and-zones
 
-- title: IAM
-  url: /coffeeintheclouds/docs/iam
+    - title: IAM
+      url: /docs/aws/iam
 
-- title: Route 53
-  url: /coffeeintheclouds/docs/route53
+    - title: Route 53
+      url: /docs/aws/route53
 
-- title: EC2
-  url: /coffeeintheclouds/docs/ec2
+    - title: EC2
+      url: /docs/aws/ec2
 
-- title: RDS
-  url: /coffeeintheclouds/docs/rds
+    - title: RDS
+      url: /docs/aws/rds
 
-- title: ElastiCache
-  url: /coffeeintheclouds/docs/elasticache
+    - title: ElastiCache
+      url: /docs/aws/elasticache
 
-- title: VPC
-  url: /coffeeintheclouds/docs/vpc
+    - title: VPC
+      url: /docs/aws/vpc
 
-- title: S3
-  url: /coffeeintheclouds/docs/s3
+    - title: S3
+      url: /docs/aws/s3
 
-- title: Architecture
-  url: /coffeeintheclouds/docs/architecture
+    - title: Architecture
+      url: /docs/aws/architecture
 
-- title: AWS CLI
-  url: /coffeeintheclouds/docs/awscli
+    - title: AWS CLI
+      url: /docs/aws/awscli
+- title: Software Engineering
+  id: se
+  entries:
+    - title: Object Oriented Principles
+      url: /docs/se/oop
