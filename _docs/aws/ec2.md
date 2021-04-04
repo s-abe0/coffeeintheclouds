@@ -135,7 +135,7 @@ Load Balancer can scale but it is not instantaneously. If a massive scale is req
 
 **Load Balancer types**
 
-*Classic* - Old generation of load balancer (version 1). They expose a public DNS rather than an public IP. Classic load balancers do not use target groups, instead instances are regitstered to it directly. Supports Layer 4 & Layer 7 traffic. It is recommended to use newer generation load balancers (version 2), but use a Classic load balancer if:
+*Classic* - Old generation of load balancer (version 1). They expose a public DNS rather than an public IP. Classic load balancers do not use target groups, instead instances are registered to it directly. Supports Layer 4 & Layer 7 traffic. It is recommended to use newer generation load balancers (version 2), but use a Classic load balancer if:
   * Need support for EC2-Classic
 
 *Application* - Newer generation (version 2) load balancer that works on Layer 7 (HTTP/HTTPS, WebSocket). They expose a public static DNS rather than an public IP, and do not support Elastic IP assignment. Application load balancers are the most common to use. Target group instances don't see outside world client IPs, but instead the IP of the load balancer. Client IPs are within the X-Forwarded-For header. Benefits of Application load balancer:

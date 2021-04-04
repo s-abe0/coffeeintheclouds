@@ -4,7 +4,7 @@ layout: default
 
 ## Virtual Private Cloud
 
-Virtual Private Clouds enables to launch AWS resources in a virtual network which resembles a traditional network, but with the benefits of a scalable infrastructure. VPC is the networking layer for EC2 and spans all the Availability Zones for a Region.
+Virtual Private Cloud enables to launch AWS resources in a virtual network which resembles a traditional network, but with the benefits of a scalable infrastructure. VPC is the networking layer for EC2 and spans all the Availability Zones for a Region.
 
 *Subnets* - A range of IP addresses in a VPC that AWS resources can be launched into. Subnets allow to partition the network within a VPC, and one or more subnets can be added in each AZ.
   * A *public* subnet is a subnet that is accessible from the internet

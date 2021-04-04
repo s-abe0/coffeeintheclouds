@@ -36,3 +36,5 @@ contents:
   entries:
     - title: Object Oriented Principles
       url: /docs/se/oop
+    - title: JavaScript Concepts
+      url: /docs/se/js
